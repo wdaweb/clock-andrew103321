@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            overflow: hidden;
+            background: black;
+        }
+
+        .pies {
+            margin: auto;
+            left: 445px;
+            margin-left: 500px;
+            position: absolute;
+            width: 400px;
+            height: 800px;
+            overflow: hidden;
+            border-radius: 0 400px 400px 0;
+            filter: drop-shadow(0 0 0.75rem crimson);
+
+        }
+
+        .pies:before,
+        .pies:after {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 800px;
+            height: 400px;
+            /* background:#0ce; */
+            border-style: solid;
+            border-color: red;
+            border-width: 20px 20px 0;
+            border-radius: 400px 400px 0 0;
+            transform-origin: 400px 400px;
+        }
+
+        .pies:before {
+            z-index: 1;
+
+            transform: rotate(-90deg);
+        }
+
+        .pies:after {
+            opacity: 0;
+            z-index: 2;
+            transform: rotate(90deg);
+
+        }
+
+        .piem {
+            top: 115px;
+            left: 545px;
+            margin-left: 200px;
+            position: absolute;
+            width: 300px;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 0 300px 300px 0;
+            z-index: 3;
+            filter: drop-shadow(0 0 0.75rem green);
+
+        }
+
+        .piem:before,
+        .piem:after {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 300px;
+            /* background:red; */
+            border-style: solid;
+            border-color: green;
+            border-width: 20px 20px 0;
+            border-radius: 300px 300px 0 0;
+            transform-origin: 300px 300px;
+
+        }
+
+        .piem:before {
+            z-index: 2;
+
+            transform: rotate(-90deg);
+        }
+
+        .piem:after {
+            opacity: 0;
+            z-index: 3;
+            transform: rotate(90deg);
+
+        }
+
+        .pieh {
+            top: 215px;
+            left: 650px;
+            margin-left: 100px;
+            position: absolute;
+            width: 200px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 0 200px 200px 0;
+            z-index: 5;
+            filter: drop-shadow(0 0 0.75rem yellow);
+
+
+        }
+
+        .pieh:before,
+        .pieh:after {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 200px;
+            /* background:green; */
+            border-style: solid;
+            border-color: yellow;
+            border-width: 20px 20px 0;
+            border-radius: 200px 200px 0 0;
+            transform-origin: 200px 200px;
+
+        }
+
+        .pieh:before {
+            z-index: 2;
+
+            transform: rotate(-90deg);
+        }
+
+        .pieh:after {
+            opacity: 0;
+            z-index: 3;
+            transform: rotate(90deg);
+
+        }
+
+        #time1 {
+            position: relative;
+            top: 848px;
+            text-align: center;
+            margin: 20px auto;
+            font-size: 50px;
+            color: #fff;
+            font-family: 'Orbitron';
+            filter: drop-shadow(0px 0px 5px #ff0);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class='pieh'></div>
+    <div class='piem'></div>
+    <div class='pies'></div>
+    <p id='time1'><span id='time'></span></p>
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+
+
+        // let time = document.getElementById("time")
+
+
+        function clock() {
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+            let y = date.getFullYear();
+            let mon = date.getMonth() + 1;
+            let d = date.getDate();
+    
+            time.innerText = y + "年" + mon + "月" + d + "日" + h + "點" + m + "分" + s + "秒";
+
+
+
+            $(function () {
+                var deg;
+
+                degs = (s) * 6;
+                // console.log(s)
+                _degs(degs);
+
+                function _degs(deg) {
+                    if (deg < 180) {
+                        if (deg==0) {
+                            $('head').append(
+                            "<style>" +
+                            ".pies{width:800px; margin-left:0;border-radius:0;}" +
+                            ".pies:before{transform:rotate(" + (360 - 90) + "deg);}" +
+                            ".pies:after{opacity:1;}" +
+                            "</style>"
+                        );
+                        } else {
+
+                            $('head').append(
+                                "<style>" +
+                                ".pies{width:400px; margin-left:400px;border-radius:0 400px 400px 0;}" +
+                                ".pies:before{transform:rotate(" + (deg - 90) + "deg);}" +
+                                ".pies:after{opacity:0;}" +
+                                "</style>"
+                            );
+                        }
+                    } else {
+                        $('head').append(
+                            "<style>" +
+                            ".pies{width:800px; margin-left:0;border-radius:0;}" +
+                            ".pies:before{transform:rotate(" + (deg - 90) + "deg);}" +
+                            ".pies:after{opacity:1;}" +
+                            "</style>"
+                        );
+                    }
+                }
+
+                degs = (m) * 6;
+                console.log(degs)
+                _degm(degs);
+
+                function _degm(deg) {
+                    if (deg < 180) {
+                      if(deg==0){
+                        $('head').append(
+                            "<style>" +
+                            ".piem{width:600px; margin-left:0;border-radius:0;}" +
+                            ".piem:before{transform:rotate(" + (360 - 90) + "deg);}" +
+                            ".piem:after{opacity:1;}" +
+                            "</style>"
+                        );
+                      }else{
+                        $('head').append(
+                            "<style>" +
+                            ".piem{width:300px; margin-left:300px;border-radius:0 300px 300px 0;}" +
+                            ".piem:before{transform:rotate(" + (deg - 90) + "deg);}" +
+                            ".piem:after{opacity:0;}" +
+                            "</style>"
+                        );
+                      }
+                    } else {
+                        $('head').append(
+                            "<style>" +
+                            ".piem{width:600px; margin-left:0;border-radius:0;}" +
+                            ".piem:before{transform:rotate(" + (deg - 90) + "deg);}" +
+                            ".piem:after{opacity:1;}" +
+                            "</style>"
+                        );
+                    }
+                }
+
+                degs = (h) * 30;
+                // console.log(degs)
+                _degh(degs);
+
+                function _degh(deg) {
+                    if (deg < 180) {
+                        if(deg==0){
+                        $('head').append(
+                            "<style>" +
+                            ".piem{width:600px; margin-left:0;border-radius:0;}" +
+                            ".piem:before{transform:rotate(" + (360 - 90) + "deg);}" +
+                            ".piem:after{opacity:1;}" +
+                            "</style>"
+                        );
+                      }else{
+                        $('head').append(
+                            "<style>" +
+                            ".piem{width:300px; margin-left:300px;border-radius:0 300px 300px 0;}" +
+                            ".piem:before{transform:rotate(" + (deg - 90) + "deg);}" +
+                            ".piem:after{opacity:0;}" +
+                            "</style>"
+                        );
+                      }
+                    } else {
+                        $('head').append(
+                            "<style>" +
+                            ".pieh{width:400px; margin-left:0;border-radius:0;}" +
+                            ".pieh:before{transform:rotate(" + (deg - 90) + "deg);}" +
+                            ".pieh:after{opacity:1;}" +
+                            "</style>"
+                        );
+                    }
+                }
+
+            });
+
+
+        }
+
+        clock();
+        setInterval(clock, 1000);
+    </script>
+</body>
+
+</html>
